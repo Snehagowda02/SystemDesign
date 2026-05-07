@@ -27,12 +27,19 @@ setting parameters for a class through constructor or getter and setter
 
 in every setter it returns this object
 Phone p = new Phone("android", 5, 6,7,8,); // bad code
-
+constructor normal 
 in setter need to mention
 public class PhoneBuilder{
+    // take all variables from Phone
+    // take all setters to it 
+
     public PhoneBuilder setOs(String s){
         this.os = s;
         return this; /// main return this
+    }
+    public PhoneBuilder setRam(int ram){
+        this.ram = ram;
+        return this;
     }
     public Phone getPhone(){
         return new Phone(os, gsg,gsdfgr,gesrdft,gdrfg);
@@ -40,13 +47,57 @@ public class PhoneBuilder{
 }
 
 /// in main 
-Phone p = new PhoneBuilder.setOs("ANdorid).getPhone();
+Phone p = new PhoneBuilder.setOs("ANdorid").getPhone();
 
+// PhoneBuilder creates new Phone Object , SO it takes default parameters (null)
+example
+
+
+class Main {
+    public static void main(String[] args) {
+        Product m = new Product.Builder("mmilk").build();
+        System.out.println(m);
+        
+    }
+}
+class Product{
+    private String name;
+    private int price;
+    private Product(Builder b){
+        this.name = b.name;
+        this.price = b.price;
+    }
+    
+    public static class Builder{
+        private String name;
+        private int price;
+        public Builder(String name){
+            this.name = name;
+        }
+       // setter only for optional fields
+        public Builder setPrice(int p){
+            this.price= p;
+            return this;
+        }
+        
+        public Product build(){
+            return new Product(this);
+        }
+    }
+    @Override
+    public String toString() {
+        return "Product{name='" + name + "', price=" + price + "}";
+    }
+}
 
 3. PROTOTYPE DESIGN PATTERN
 second obj creation from first object
 using cloning
-Deep clone and shallow CLone
+Deep clone and shallow Clone
+shallow clone - uses refernce(so same object)
+deep clone- copy the existing obj to new obj
+
+implement Cloneable(marker interface)
 
 
 
@@ -85,7 +136,7 @@ public interface Pen{
 // 
 public class adapter implements Pen{
     PilotPen pp = new PilotPen();
-    public void wrie(String s){
+    public void wrtie(String s){
         pp.mark(s);
     }
 
@@ -164,6 +215,39 @@ Composite can have many Composite inside it or can have Leaf also
 Common thing between Leaf and Composite using interface
 so show() methos is common among that 
 
+
+OBSERVER DESIGN PATTERN
+notification()
+Subscribers are observers 
+you'll subscribe, then if channel post something , you'll get notified
+
+
+1. SINGLETON DESIGN PATTERN
+// use any one synchronized
+
+
+class Main {
+    public static void main(String[] args) {
+        B.getInstance().display();
+    }
+}
+
+class B{
+    private static B obj;
+    private B(){
+    }
+    public synchronized static B getInstance(){
+        synchronized(B.class){
+            if(obj == null){
+                obj = new B();
+            }
+        }
+        return obj;
+    }
+    public void display(){
+        System.out.println("brower is set");
+    }
+}
 
 
 
