@@ -1,4 +1,4 @@
-Creational Design Pattern
+*** Creational Design Pattern ***
 
 
 1. Factory Design Pattern
@@ -100,8 +100,38 @@ deep clone- copy the existing obj to new obj
 implement Cloneable(marker interface)
 
 
+4. SINGLETON DESIGN PATTERN
+// use any one synchronized
 
-STRUCTURAL DESIGN PATTERN
+
+class Main {
+    public static void main(String[] args) {
+        B.getInstance().display();
+    }
+}
+
+class B{
+    private static B obj;
+    private B(){
+    }
+    public synchronized static B getInstance(){
+        synchronized(B.class){
+            if(obj == null){
+                obj = new B();
+            }
+        }
+        return obj;
+    }
+    public void display(){
+        System.out.println("brower is set");
+    }
+}
+
+
+
+
+*** STRUCTURAL DESIGN PATTERN ***
+
 1. ADAPTER Design Pattern
 School {
     psvm(){
@@ -216,38 +246,25 @@ Common thing between Leaf and Composite using interface
 so show() methos is common among that 
 
 
-OBSERVER DESIGN PATTERN
+3. DECORATOR DESIGN PATTERN
+
+
+
+*** BEHAVIOURAL DESIGN PATTERN ***
+
+1. Strategy design pattern:
+changes behaviour/algorigthm
+    Strategy pattern is used when:
+
+        behavior/algorithm can change
+        multiple ways exist to perform same action
+        choose behavior at runtime
+
+2. OBSERVER DESIGN PATTERN
 notification()
 Subscribers are observers 
 you'll subscribe, then if channel post something , you'll get notified
 
-
-1. SINGLETON DESIGN PATTERN
-// use any one synchronized
-
-
-class Main {
-    public static void main(String[] args) {
-        B.getInstance().display();
-    }
-}
-
-class B{
-    private static B obj;
-    private B(){
-    }
-    public synchronized static B getInstance(){
-        synchronized(B.class){
-            if(obj == null){
-                obj = new B();
-            }
-        }
-        return obj;
-    }
-    public void display(){
-        System.out.println("brower is set");
-    }
-}
-
+a behavioral pattern that defines a one-to-many relationship between objects. When the state of one object (the Subject) changes, all its dependents (Observers) are notified and updated automatically
 
 
