@@ -1,6 +1,20 @@
 *** Creational Design Pattern ***
+1. Factory Design Pattern
+2. BUILDER DESIGN PATTERN
+3. PROTOTYPE DESIGN PATTERN
+4. SINGLETON DESIGN PATTERN
+
+*** STRUCTURAL DESIGN PATTERN ***
+1. ADAPTER Design Pattern
+2. COMPOSITE DESIGN PATTERN
+3. DECORATOR DESIGN PATTERN
+
+*** BEHAVIOURAL DESIGN PATTERN ***
+1. Strategy design pattern:
+2. OBSERVER DESIGN PATTERN
 
 
+*** Creational Design Pattern ***
 1. Factory Design Pattern
 
 It is just like make OS as interface implement it for apple, samsung
@@ -247,7 +261,80 @@ so show() methos is common among that
 
 
 3. DECORATOR DESIGN PATTERN
+example is coffee decorator in starbucks
 
+***
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class Main {
+    public static void main(String[] args) {
+        // System.out.println("Start small. Ship something.");
+        
+        Coffee c = new SimpleCoffee();
+        c.getDescrp();
+        System.out.println(c.getCost());
+          
+        Coffee a = new MilkDeco(c);
+        a.getDescrp();
+        System.out.println(a.getCost());
+        
+        
+    }
+}
+
+interface Coffee{
+    public int getCost();
+    public void getDescrp();
+}
+class SimpleCoffee implements Coffee {
+    
+    @Override
+    public int getCost(){
+        return 5;
+    }
+    @Override
+    public void getDescrp(){
+        System.out.println("this is the simple cofee with cost" + this.getCost());
+    }
+    
+}
+
+abstract class CoffeeDeco implements Coffee {
+    protected Coffee cof;
+    
+    public CoffeeDeco(Coffee co){
+        this.cof = co;
+    }
+    
+    
+    @Override
+    public int getCost(){
+        return cof.getCost();
+    }
+    @Override
+    public void getDescrp(){
+        System.out.println("this is the simple cofee with cost" + cof.getCost());
+    }
+}
+
+class MilkDeco extends CoffeeDeco {
+    
+    public MilkDeco(Coffee cof){
+        super(cof);
+    }
+    @Override
+    public int getCost(){
+        return super.getCost() + 15;
+    }
+    
+    @Override
+    public void getDescrp(){
+        super.getDescrp();
+        System.out.println("milk added with extra cose" + this.getCost());
+    }
+}
+***
 
 
 *** BEHAVIOURAL DESIGN PATTERN ***
