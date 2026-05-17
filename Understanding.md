@@ -17,6 +17,7 @@
 *** Creational Design Pattern ***
 1. Factory Design Pattern
 
+client asks Factory to create a obj, Facotry gives the object
 It is just like make OS as interface implement it for apple, samsung
 OS is factory -- achieves loose coupling
 helps in extension
@@ -31,7 +32,7 @@ OS os = obj.getInstance("OPEN); // return OS
 os.spec();
 
 // this helps in not changing anything in client class(main class) , new OS can be implemented easily and just include the case in swithc in OSFactory 
-/// this is Factory design patter 
+/// this is Factory design pattern
 
 
 2. BUILDER DESIGN PATTERN
@@ -345,7 +346,129 @@ changes behaviour/algorigthm
 
         behavior/algorithm can change
         multiple ways exist to perform same action
-        choose behavior at runtime
+        when we need to choose behavior at runtime
+
+***
+
+
+// strategy design pattern -- bheaviour change in run time 
+class Main {
+    public static void main(String[] args) {
+        CompaninionRobo r = new CompaninionRobo(
+            new NormalTalk(), new NormalWalk(), new NormalFly());
+        r.walk();
+        r.talk();
+        r.fly();
+        r.projection();
+        r.setFlyBehavior(new NoFly());
+
+        r.fly();
+    }
+}
+
+/* =======================
+   TALK STRATEGY
+   ======================= */
+
+interface Talkable{
+    void talk();
+}
+class NormalTalk implements Talkable{
+    @Override
+    public void talk(){
+        System.out.println("Normal talk");
+    }
+}
+class NoTalk implements Talkable {
+    @Override
+    public void talk(){
+        System.out.println("No Normal talk");
+    }
+}
+
+/* =======================
+   WALK STRATEGY
+   ======================= */
+interface walkable{
+    void walk();
+}
+class NormalWalk implements walkable{
+    @Override
+    public void walk(){
+        System.out.println("Normal walk");
+    }
+}
+class NoWalk implements walkable {
+    @Override
+    public void walk(){
+        System.out.println("No Normal walk");
+    }
+}
+
+/* =======================
+   FLY STRATEGY
+   ======================= */
+
+interface Flyable{
+    void fly();
+}
+
+class NormalFly implements Flyable{
+    @Override
+    public void fly(){
+        System.out.println("Normal fly");
+    }
+}
+class NoFly implements Flyable {
+    @Override
+    public void fly(){
+        System.out.println("No Normal fly");
+    }
+}
+abstract class Robot {
+    private Talkable talk;
+    private walkable walk;
+    private Flyable fly;
+    public Robot(Talkable t, walkable w, Flyable f){
+        this.talk = t;
+        this.walk = w;
+        this.fly = f;
+    }
+    public void talk(){
+        talk.talk();
+    }
+     public void walk(){
+        walk.walk();
+    }
+     public void fly(){
+        fly.fly();
+    }
+    public abstract void projection();
+    
+        // Runtime behavior change
+
+    public void setTalkBehavior(Talkable talkBehavior) {
+        this.talk = talkBehavior;
+    }
+
+    public void setWalkBehavior(walkable walkBehavior) {
+        this.walk = walkBehavior;
+    }
+
+    public void setFlyBehavior(Flyable flyBehavior) {
+        this.fly = flyBehavior;
+    }
+    
+}
+class CompaninionRobo extends Robot{
+    public CompaninionRobo(Talkable t, walkable w, Flyable f){
+        super(t,w,f);
+    }
+    public void projection(){
+        System.out.println("it is the projection");
+    }
+}
+***
 
 2. OBSERVER DESIGN PATTERN
 notification()
