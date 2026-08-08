@@ -17,6 +17,144 @@
 *** Creational Design Pattern ***
 1. Factory Design Pattern
 
+3 variations/types in Factory Design Pattern
+    1. Simple Factory
+    2. Factory Method
+    3. Abstract Factory -- Garlic Bread
+
+    1.simple Factory
+    // Simple Factory Pattern
+
+class Main {
+
+    public static void main(String args[]) {
+
+        OSFactory factory = new OSFactory();
+
+        OS os = factory.createOS("ios");
+
+        os.spec();
+    }
+}
+
+/* =======================
+   PRODUCT INTERFACE
+   ======================= */
+
+interface OS {
+    void spec();
+}
+
+/* =======================
+   CONCRETE PRODUCTS
+   ======================= */
+
+class IOS implements OS {
+
+    @Override
+    public void spec() {
+        System.out.println("IOS Operating System");
+    }
+}
+
+class Windows implements OS {
+
+    @Override
+    public void spec() {
+        System.out.println("Windows Operating System");
+    }
+}
+
+/* =======================
+   FACTORY
+   ======================= */
+
+class OSFactory {
+
+    public OS createOS(String type) {
+
+        switch (type.toLowerCase()) {
+
+            case "ios":
+                return new IOS();
+
+            case "windows":
+                return new Windows();
+
+            default:
+                throw new IllegalArgumentException("Invalid OS Type");
+        }
+    }
+}
+
+    2.. Factory Method  -- made factory also abstract 
+    // Factory Method
+
+class Main{
+    public static void main(String args[]){
+        Factory f = new McD();
+        Burger b = f.createBurger("basic");
+        b.prepare();
+    }
+}
+interface Burger{
+    void prepare();
+}
+class Basic implements Burger{
+    @Override
+    public void prepare(){
+        System.out.println("this is basic");
+    }
+    
+}
+class Standard implements Burger{
+    @Override
+    public void prepare(){
+        System.out.println("this is standard");
+    }
+}
+class BasicWheat implements Burger{
+    @Override
+    public void prepare(){
+        System.out.println("this is baeicWheat");
+    }
+    
+}
+class StandaredWheat implements Burger{
+    @Override
+    public void prepare(){
+        System.out.println("this is StandaredWheat");
+    }
+}
+interface Factory{
+    public Burger createBurger(String type);
+}
+class McD implements Factory{
+    @Override
+    public Burger createBurger(String type){
+        switch (type){
+            case "basic" : return new Basic();
+            case "stabd" : return new Standard();
+            default:
+            throw new IllegalArgumentException("not found");
+        }
+    }
+}
+class KIng implements Factory{
+    @Override
+    public Burger createBurger(String type){
+        switch (type){
+            case "basic" : return new BasicWheat();
+            case "stabd" : return new StandaredWheat();
+            default:
+            throw new IllegalArgumentException("not found");
+        }
+    }
+}
+
+
+
+
 client asks Factory to create a obj, Facotry gives the object
 It is just like make OS as interface implement it for apple, samsung
 OS is factory -- achieves loose coupling
