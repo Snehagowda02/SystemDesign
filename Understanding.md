@@ -12,6 +12,7 @@
 *** BEHAVIOURAL DESIGN PATTERN ***
 1. Strategy design pattern:
 2. OBSERVER DESIGN PATTERN
+3. Memento Design pattern
 
 
 *** Creational Design Pattern ***
@@ -614,5 +615,14 @@ Subscribers are observers
 you'll subscribe, then if channel post something , you'll get notified
 
 a behavioral pattern that defines a one-to-many relationship between objects. When the state of one object (the Subject) changes, all its dependents (Observers) are notified and updated automatically
+
+3. MEMENTO DESIGN PATTERN
+    it is used in text editor - undo redo functionality
+    game save and load functionality
+    Originator - whose state needs to be stored
+    Memento - stores internal state of the originator at specific time
+    Caretaker - manages and keeps track of memento objects
+    client - interacts with originator and caretaker
+
 
 
